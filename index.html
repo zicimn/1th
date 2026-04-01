@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你被骗了</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .cartoon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            display: block;
+        }
+        h1 {
+            color: #ff7b00;
+            font-size: 28px;
+            margin: 10px 0;
+        }
+        .subtitle {
+            color: #b0b0b0;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .video-container {
+            position: relative;
+            margin: 20px 0;
+        }
+        video {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .unmute-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .action-btn {
+            background-color: #ff7b00;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+        .action-btn:hover {
+            background-color: #ff9500;
+            transform: scale(1.05);
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+            .cartoon {
+                width: 60px;
+                height: 60px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .subtitle {
+                font-size: 12px;
+            }
+            .action-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .footer {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header" id="header">
+            <img src="https://res.cloudinary.com/djgtkiaje/image/upload/f_auto,q_auto/1_oc81i5" alt="卡通形象" class="cartoon">
+            <h1 id="title">愚人节快乐喵~</h1>
+            <div class="subtitle" id="subtitle">点击下面的按钮开始你的愚人节之旅喵~</div>
+        </div>
+        
+        <div class="video-container" id="videoContainer" style="display: none;">
+            <video id="myVideo" autoplay loop playsinline>
+                <source src="https://res.cloudinary.com/djgtkiaje/video/upload/v1711921308/never_lqa4qm.mp4" type="video/mp4">
+                您的浏览器不支持视频播放
+            </video>
+        </div>
+        
+        <button class="action-btn" onclick="startAprilFools()">
+            开始愚人节之旅喵！
+        </button>
+        
+        <div class="footer" id="footer">
+            <p>愚人节快乐喵~</p>
+        </div>
+    </div>
+    
+    <script>
+        function startAprilFools() {
+            // 更改标题和内容
+            document.getElementById('title').textContent = '你被骗了喵~';
+            document.getElementById('subtitle').textContent = '哈哈哈哈！愚人节快乐！';
+            document.getElementById('footer').innerHTML = '<p>你被骗啦！愚人节快乐喵~</p>';
+            
+            // 显示视频
+            const videoContainer = document.getElementById('videoContainer');
+            const video = document.getElementById('myVideo');
+            videoContainer.style.display = 'block';
+            
+            // 尝试播放视频并开启声音
+            video.play().then(() => {
+                // 播放成功后尝试开启声音
+                video.muted = false;
+            }).catch(error => {
+                console.log('播放失败:', error);
+                // 尝试静音播放
+                video.muted = true;
+                return video.play();
+            });
+        }
+    </script>
+
+</body>
+</html>
